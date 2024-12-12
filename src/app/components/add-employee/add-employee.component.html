@@ -1,0 +1,33 @@
+<div class="container">
+  <h2 class="title">Добавить сотрудника</h2>
+
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="form">
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Фамилия</mat-label>
+      <input matInput formControlName="lastName" />
+      <mat-error *ngIf="isFieldInvalid('lastName')">
+        Поле "Фамилия" обязательно для заполнения.
+    </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Имя</mat-label>
+      <input matInput formControlName="firstName" />
+      <mat-error *ngIf="isFieldInvalid('firstName')">
+        Поле "Имя" обязательно для заполнения.
+    </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Отчество</mat-label>
+      <input matInput formControlName="middleName" />
+      <mat-error *ngIf="isFieldInvalid('middleName')">
+        Поле "Отчество" обязательно для заполнения.
+    </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">
+      Добавить
+    </button>
+  </form>
+</div>

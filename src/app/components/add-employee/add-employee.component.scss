@@ -1,0 +1,67 @@
+.container {
+  max-width: 634px;
+  margin: 0 auto;
+  text-align: left;
+  
+}
+.title {
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 92px;
+  color: black;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  ::ng-deep .mdc-text-field{
+    background-color:rgb(255, 255, 255) !important;
+    color: #00BCD4;
+    padding: 0px;
+    
+  }
+  ::ng-deep .mdc-line-ripple::before{
+    border: none;
+  }
+  ::ng-deep .mat-mdc-form-field-required-marker{
+    display: none;
+  }
+  ::ng-deep .mat-mdc-form-field-infix{
+    border-bottom: 2px solid #0097a7;
+  }
+  ::ng-deep .mat-mdc-form-field-label {
+    background-color: #00BCD4 !important;
+  }
+  ::ng-deep .mdc-floating-label {
+    color: #00BCD4 !important;
+  }
+  .form-field {
+    width: 100%;
+  }
+  .form-field:last-child {
+    margin-bottom: 30px !important;
+  }
+  button {
+    width: 94px;
+    height: 36px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #FFFFFF;
+    background-color: #00bcd4 !important;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 8px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #0097a7 !important;
+    }
+  }
+
+  mat-error {
+    color: red !important;
+    font-size: 12px;
+  }
+}

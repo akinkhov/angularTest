@@ -1,0 +1,30 @@
+<div class="title">
+  <span>Список сотрудников</span>
+</div>
+
+<div *ngIf="employees.length > 0; else noEmployees">
+  <div *ngFor="let employee of employees; let i = index" class="employee-card">
+    <div class="header">Сотрудник № {{ i + 1 }}</div>
+    <div class="details">
+      <div class="row">
+        <span class="label">Фамилия</span>
+        <span class="value">{{ employee.lastName }}</span>
+      </div>
+      <div class="row">
+        <span class="label">Имя</span>
+        <span class="value">{{ employee.firstName }}</span>
+      </div>
+      <div class="row">
+        <span class="label">Отчество</span>
+        <span class="value">{{ employee.middleName }}</span>
+      </div>
+    </div>
+    <button mat-raised-button color="primary" (click)="removeEmployee(i)">
+      Удалить сотрудника
+    </button>
+  </div>
+</div>
+
+<ng-template #noEmployees>
+  <p class="empty">Сотрудников пока нет.</p>
+</ng-template>
