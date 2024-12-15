@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
+import { EmployeeService } from '../../services/employee.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-employee-list',
@@ -11,21 +11,17 @@ import { MatCardModule } from '@angular/material/card';
   styleUrls: ['./employee-list.component.scss'],
   imports: [
     CommonModule,
-    MatToolbarModule,
     MatButtonModule,
-    MatCardModule
-  ]
+  ],
 })
-export class EmployeeListComponent implements OnInit {
-  employees: { lastName: string; firstName: string; middleName: string }[] = [];
+export class EmployeeListComponent {
+  employees$: Observable<any>;
 
-  ngOnInit(): void {
-    const savedEmployees = localStorage.getItem('employees');
-    this.employees = savedEmployees ? JSON.parse(savedEmployees) : [];
+  constructor(private employeeService: EmployeeService) {
+    this.employees$ = this.employeeService.getEmployees();
   }
 
-  removeEmployee(index: number): void {
-    this.employees.splice(index, 1);
-    localStorage.setItem('employees', JSON.stringify(this.employees));
+  removeEmployee(id: number): void {
+    this.employeeService.removeEmployee(id);
   }
 }

@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { EmployeeService } from '../../services/employee.service';
 
 @Component({
   selector: 'app-add-employee',
@@ -22,27 +23,27 @@ import { CommonModule } from '@angular/common';
 })
 export class AddEmployeeComponent {
   employeeForm: FormGroup;
-  submitted = false;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private employeeService: EmployeeService,
+    private router: Router
+  ) {
     this.employeeForm = this.fb.group({
       lastName: ['', Validators.required],
       firstName: ['', Validators.required],
       middleName: ['', Validators.required],
     });
   }
-
+  
   isFieldInvalid(fieldName: string): boolean {
     const field = this.employeeForm.get(fieldName);
-    return !!(field && field.invalid && (field.touched || this.submitted));
+    return !!(field && field.invalid && (field.touched || this.employeeForm.dirty));
   }
 
   onSubmit(): void {
-    this.submitted = true;
     if (this.employeeForm.valid) {
-      const employees = JSON.parse(localStorage.getItem('employees') || '[]');
-      employees.push(this.employeeForm.value);
-      localStorage.setItem('employees', JSON.stringify(employees));
+      this.employeeService.addEmployee(this.employeeForm.value);
       this.router.navigate(['/employee-list']);
     } else {
       this.employeeForm.markAllAsTouched();

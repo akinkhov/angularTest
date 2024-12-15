@@ -1,9 +1,8 @@
 <div class="title">
   <span>Список сотрудников</span>
 </div>
-
-<div *ngIf="employees.length > 0; else noEmployees">
-  <div *ngFor="let employee of employees; let i = index" class="employee-card">
+<div *ngIf="(employees$ | async)?.length > 0; else noEmployees">
+  <div *ngFor="let employee of (employees$ | async); let i = index" class="employee-card">
     <div class="header">Сотрудник № {{ i + 1 }}</div>
     <div class="details">
       <div class="row">
@@ -19,7 +18,7 @@
         <span class="value">{{ employee.middleName }}</span>
       </div>
     </div>
-    <button mat-raised-button color="primary" (click)="removeEmployee(i)">
+    <button mat-raised-button color="primary" (click)="removeEmployee(employee.id)">
       Удалить сотрудника
     </button>
   </div>
